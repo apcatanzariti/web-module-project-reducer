@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import reducer, { initialState } from './reducers/index';
-import { /*addOne,*/ applyNumber, changeOperation } from './actions/index';
+import { /*addOne,*/ applyNumber, changeOperation, clearDisplay, addMem, recallMem, deleteMem } from './actions/index';
 
 import './App.css';
 
@@ -24,6 +24,22 @@ function App() {
     dispatch(changeOperation(operator));
   };
 
+  function clearDisplayClick () {
+    dispatch(clearDisplay());
+  };
+
+  function addMemClick () {
+    dispatch(addMem());
+  };
+
+  function recallMemClick () {
+    dispatch(recallMem());
+  };
+
+  function deleteMemClick () {
+    dispatch(deleteMem());
+  };
+
   return (
     <div className="App">
       <nav className="navbar navbar-dark bg-dark">
@@ -41,9 +57,9 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton onClick={() => {addMemClick()}} value={"M+"}/>
+              <CalcButton onClick={() => {recallMemClick()}} value={"MR"}/>
+              <CalcButton onClick={() => {deleteMemClick()}} value={"MC"}/>
             </div>
 
             <div className="row">
@@ -66,12 +82,12 @@ function App() {
 
             <div className="row">
               <CalcButton onClick={() => {changeOperationClick('+')}} value={"+"}/>
-              <CalcButton onClick={() => {changeOperationClick('*')}}value={"*"}/>
-              <CalcButton onClick={() => {changeOperationClick('-')}}value={"-"}/>
+              <CalcButton onClick={() => {changeOperationClick('*')}} value={"*"}/>
+              <CalcButton onClick={() => {changeOperationClick('-')}} value={"-"}/>
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton onClick={() => {clearDisplayClick()}} value={"CE"}/>
             </div>
 
           </form>
